@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/dc.css"/>
+</head>
+<body>
+
+<div class="container">
+<div id="test"></div>
+<div id="test-overview"></div>
+
+<script type="text/javascript" src="../js/d3.js"></script>
+<script type="text/javascript" src="../js/crossfilter.js"></script>
+<script type="text/javascript" src="../js/dc.js"></script>
+<script type="text/javascript">
+
+var focusChart = dc.seriesChart("#test");
+var overviewChart = dc.seriesChart("#test-overview");
+var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup;
+
+var parseTime = d3.time.format("%d-%b-%y");
+
+var mindate = new Date('2013-02-06'),
+	maxdate = new Date('2014-01-01'),
+	minelo = 1100,
+	maxelo = 1700;
+	
+var width = 768,
+	height = 480,
+	padding = 10,
+	overviewheight = 100;
+	
+d3.csv("s3.csv", function(error, experiments) {
+
+  ndx = crossfilter(experiments);
+  runDimension = ndx.dimension(function(d) {return [d.Expt, parseTime.parse(d.date)]; });
+  overviewRunDimension = ndx.dimension(function(d) {return [d.Expt, parseTime.parse(d.date)]; });
+  runGroup = runDimension.group().reduceSum(function(d) { return +d.Speed; });
+  overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.Speed; });
+ 
+  focusChart
+    .colors(d3.scale.ordinal().domain(["TSM"]).range("#000000"))
+    .width(width)
+    .height(height)
+    .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
+    .x(d3.time.scale().domain([mindate, maxdate]))
+    .brushOn(false)
+    .yAxisLabel("Elo")
+    .xAxisLabel("Date")
+	.clipPadding(10)
+	.elasticY(true)
+    .dimension(runDimension)
+    .group(runGroup)
+    .mouseZoomable(true)
+    .rangeChart(overviewChart)
+    .seriesAccessor(function(d) {return d.key[0];})
+    .keyAccessor(function(d) {return +d.key[1];})
+    .valueAccessor(function(d) {return +d.value - 1100;})
+	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(700).itemWidth(70));
+  focusChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
+  
+  focusChart.elasticX = function() {
+    return arguments.length ? this : false;
+  };
+
+    function rangesEqual (range1, range2) {
+        if (!range1 && !range2) {
+            return true;
+        } else if (!range1 || !range2) {
+            return false;
+        } else if (range1.length === 0 && range2.length === 0) {
+            return true;
+        } else if (range1[0].valueOf() === range2[0].valueOf() &&
+            range1[1].valueOf() === range2[1].valueOf()) {
+            return true;
+        }
+        return false;
+    }
+
+  overviewChart
+    .width(width)
+    .height(overviewheight)
+    .chart(function(c,_,_,i) {
+    var chart = dc.lineChart(c).interpolate('basis');
+    if(i===0)
+    	chart.on('filtered', function (chart) {
+            if (!chart.filter()) {
+                dc.events.trigger(function () {
+                    overviewChart.focusChart().x().domain(overviewChart.focusChart().xOriginalDomain());
+                    overviewChart.focusChart().redraw();
+                });
+            } else if (!rangesEqual(chart.filter(), overviewChart.focusChart().filter())) {
+                dc.events.trigger(function () {
+                    overviewChart.focusChart().focus(chart.filter());
+                });
+            }
+        });
+    return chart;
+    })
+    .x(d3.time.scale().domain([mindate, maxdate]))
+    .brushOn(true)
+    .xAxisLabel("Date")
+    .clipPadding(10)
+    .dimension(runDimension)
+    .group(runGroup)
+    .seriesAccessor(function(d) {return d.key[0];})
+    .keyAccessor(function(d) {return +d.key[1];})
+    .valueAccessor(function(d) {return +d.value})
+
+  dc.renderAll();
+
+  });
+
+</script>
+
+</div>
+</body>
+</html>
