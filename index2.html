@@ -41,7 +41,7 @@ d3.csv("s3.csv", function(error, experiments) {
   overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.Speed; });
  
   focusChart
-    .colors(d3.scale.ordinal().domain(["C9", "CLG", "CLG2", "COL", "CRS", "CST", "DIG", "DIG2", "GGU", "MRN", "TSM", "TSM2", "VES", "VUL", "VUL2"]).range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#000000", "#000000", "#000000", "#000000", "#000000",]))
+    .colors(d3.scale.ordinal().domain(["TSM", "CLG", "CLG2", "COL", "CRS", "CST", "DIG", "DIG2", "GGU", "MRN", "C9", "TSM2", "VES", "VUL", "VUL2"]).range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#000000", "#000000", "#000000", "#000000", "#000000",]))
     .width(width)
     .height(height)
     .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
