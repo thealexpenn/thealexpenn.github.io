@@ -23,7 +23,7 @@ var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup;
 var parseTime = d3.time.format("%d-%b-%y");
 
 var mindate = new Date(2013,0,1),
-	maxdate = new Date(2015,30,4),
+	maxdate = new Date(2014,30,4),
 	minelo = 1100,
 	maxelo = 1700;
 	
@@ -32,7 +32,7 @@ var width = 768,
 	padding = 10,
 	overviewheight = 100;
 	
-d3.csv("s3spring.csv", function(error, experiments) {
+d3.csv("s3.csv", function(error, experiments) {
 
   ndx = crossfilter(experiments);
   runDimension = ndx.dimension(function(d) {return [d.Expt, parseTime.parse(d.date)]; });
