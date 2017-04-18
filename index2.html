@@ -22,7 +22,7 @@ var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup;
 
 var parseTime = d3.time.format("%d-%b-%y");
 
-var mindate = new Date('2013-02-06'),
+var mindate = new Date('2013-02-08'),
 	maxdate = new Date('2014-01-01'),
 	minelo = 1100,
 	maxelo = 1700;
@@ -32,7 +32,7 @@ var width = 768,
 	padding = 10,
 	overviewheight = 100;
 	
-d3.csv("s3.csv", function(error, experiments) {
+d3.csv("s3eu.csv", function(error, experiments) {
 
   ndx = crossfilter(experiments);
   runDimension = ndx.dimension(function(d) {return [d.Expt, parseTime.parse(d.date)]; });
@@ -41,7 +41,7 @@ d3.csv("s3.csv", function(error, experiments) {
   overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.Speed; });
  
   focusChart
-    .colors(d3.scale.ordinal().domain(["C9", "CLG", "COL", "CRS", "CST", "DIG", "MRN", "TSM", "VES", "VUL", "zCLG", "zCRS", "zCST", "zDIG", "zTSM", "zVUL"]).range(["#459fd3", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#ff7f0e", "#d62728", "#9467bd", "#8c564b", "#7f7f7f", "#17becf"]))
+    .colors(d3.scale.ordinal().domain(["C9", "CLG", "COL", "CRS", "CST", "DIG", "MRN", "TSM", "zVES", "zzVUL", "zCLG", "zCRS", "zCST", "zDIG", "zTSM", "zVUL", "zzC9", "zzCLG", "zzCRS", "zzCST", "zzDIG", "EG", "zzTSM", "XDG"]).range(["#459fd3", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#ff7f0e", "#d62728", "#9467bd", "#8c564b", "#7f7f7f", "#17becf", "#459fd3", "#ff7f0e", "#d62728", "#9467bd", "#8c564b", "#bcbd22", "#7f7f7f", "#17becf"]))
     .width(width)
     .height(height)
     .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })

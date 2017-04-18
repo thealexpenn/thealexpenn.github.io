@@ -1,0 +1,6 @@
+> data = read.csv("2013euspring.csv", stringsAsFactors = FALSE)
+> lcs <- data[,c(2,3,4,5)]
+> robj <- elo(lcs, init = 1300, kfac=20, history = TRUE)
+> robj
+
+> write.csv(robj$history, file ="2013euspringresults.csv")
