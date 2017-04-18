@@ -41,7 +41,7 @@ d3.csv("s3.csv", function(error, experiments) {
   overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.Speed; });
  
   focusChart
-    .colors(d3.scale.category20())
+    .colors(d3.scale.ordinal().domain(["C9", "CLG", "COL", "CRS", "CST", "DIG", "MRN", "TSM", "VES", "VUL", "zCLG", "zCRS", "zCST", "zDIG", "zTSM", "zVUL"]).range(["#459fd3", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#ff7f0e", "#d62728", "#9467bd", "#8c564b", "#7f7f7f", "#17becf"]))
     .width(width)
     .height(height)
     .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
@@ -57,8 +57,9 @@ d3.csv("s3.csv", function(error, experiments) {
     .rangeChart(overviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
+    
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(700).itemWidth(70));
+	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(700).itemWidth(70).maxItems(10));
   focusChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
   
   focusChart.elasticX = function() {
