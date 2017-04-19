@@ -32,7 +32,7 @@ var width = 768,
 	padding = 10,
 	overviewheight = 100;
 	
-d3.csv("s3eu2.csv", function(error, experiments) {
+d3.csv("s3eu3.csv", function(error, experiments) {
 
   ndx = crossfilter(experiments);
   runDimension = ndx.dimension(function(d) {return [d.Expt, parseTime.parse(d.date)]; });
