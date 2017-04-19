@@ -41,7 +41,7 @@ d3.csv("s3eu.csv", function(error, experiments) {
   overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.Speed; });
  
   focusChart
-    .colors(d3.scale.ordinal().domain(["FNC", "zFNC", "GMB", "zGMB", "SK", "zSK", "EG", "zEG", "zCW", "NIP", "AAA", "GIA", "DB", "ATN", "LD", "MYM"]).range(["#459fd3", "#459fd3", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728", "#9467bd", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#2ca02c"]))
+    .colors(d3.scale.ordinal().domain(["FNC", "zFNC", "GMB", "zGMB", "SK", "zSK", "EG", "zEG", "zCW", "NIP", "AAA", "GIA", "DB", "ATN", "LD", "MYM"]).range(["#459fd3", "#459fd3", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728", "#9467bd", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aec7e8"]))
     .width(width)
     .height(height)
     .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
@@ -60,7 +60,7 @@ d3.csv("s3eu.csv", function(error, experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(700).itemWidth(70).maxItems(10));
+	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(700).itemWidth(70).maxItems(11));
   focusChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
   
   focusChart.elasticX = function() {
