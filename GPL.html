@@ -38,7 +38,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
   runDimension = ndx.dimension(function(d) {return [d.team, parseTime.parse(d.date)]; });
   overviewRunDimension = ndx.dimension(function(d) {return [d.team, parseTime.parse(d.date)]; });
   runGroup = runDimension.group().reduceSum(function(d) { return +d.elo; });
-  overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.welo; });
+  overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.elo; });
  
   focusChart
     .colors(d3.scale.ordinal().domain(["TPA", "SGS", "ahq", "SAJ", "KLH", "SF5", "MLE", "BKT"]).range(["#459fd3", "#459fd3", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728"]))
