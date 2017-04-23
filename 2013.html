@@ -55,7 +55,6 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
-    
 	.clipPadding(10)
 	.elasticY(true)
     .dimension(runDimension)
@@ -64,10 +63,10 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .rangeChart(gplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
-    
     .valueAccessor(function(d) {return +d.value - 1100;})
 	.legend(dc.legend().x(50).y(300).itemHeight(13).gap(5).horizontal(1).legendWidth(280).itemWidth(70).maxItems(8));
   gplChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
+  gplChart.margins().left += 40;
   
   gplChart.elasticX = function() {
     return arguments.length ? this : false;
