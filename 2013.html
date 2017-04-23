@@ -139,7 +139,6 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
-    
 	.clipPadding(10)
 	.elasticY(true)
     .dimension(runDimension)
@@ -150,7 +149,7 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(280).itemWidth(70).maxItems(8));
+	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(350).itemWidth(70).maxItems(10));
   lplChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
   
   lplChart.elasticX = function() {
