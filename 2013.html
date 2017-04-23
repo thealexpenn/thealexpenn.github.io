@@ -28,6 +28,8 @@ var parseTime = d3.time.format("%d-%b-%y");
 
 var gplmindate = new Date('2013-01-01'),
 	gplmaxdate = new Date('2013-09-01'),
+	lplmindate = new Date('2013-01-01'),
+	lplmaxdate = new Date('2013-09-01'),
 	minelo = 1100,
 	maxelo = 1700;
 	
@@ -105,7 +107,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
         });
     return chart;
     })
-    .x(d3.time.scale().domain([mindate, maxdate]))
+    .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
     .brushOn(true)
     .xAxisLabel("Date")
     .clipPadding(10)
@@ -133,7 +135,7 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .width(width)
     .height(height)
     .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
-    .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
+    .x(d3.time.scale().domain([lplmindate, lplmaxdate]))
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
@@ -189,7 +191,7 @@ d3.csv("S3LPL.csv", function(error, experiments) {
         });
     return chart;
     })
-    .x(d3.time.scale().domain([mindate, maxdate]))
+    .x(d3.time.scale().domain([lplmindate, lplmaxdate]))
     .brushOn(true)
     .xAxisLabel("Date")
     .clipPadding(10)
