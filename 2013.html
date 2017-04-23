@@ -67,6 +67,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
 	.legend(dc.legend().x(75).y(50).itemHeight(13).gap(5).horizontal(1).legendWidth(280).itemWidth(70).maxItems(8));
   gplChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
   gplChart.margins().left += 40;
+  gplChart.margins().top += 40;
   
   gplChart.elasticX = function() {
     return arguments.length ? this : false;
