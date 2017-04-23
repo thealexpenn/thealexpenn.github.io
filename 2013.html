@@ -59,7 +59,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .dimension(runDimension)
     .group(runGroup)
     .mouseZoomable(true)
-    .rangeChart(overviewChart)
+    .rangeChart(gplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
     
@@ -143,7 +143,7 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .dimension(runDimension)
     .group(runGroup)
     .mouseZoomable(true)
-    .rangeChart(overviewChart)
+    .rangeChart(lplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
     
