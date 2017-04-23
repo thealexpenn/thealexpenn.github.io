@@ -96,12 +96,12 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     	chart.on('filtered', function (chart) {
             if (!chart.filter()) {
                 dc.events.trigger(function () {
-                    gplOverviewChart.gplChart().x().domain(overviewChart.gplChart().xOriginalDomain());
-                    gplOverviewChart.gplChart().redraw();
+                    gplOverviewChart.focusChart().x().domain(overviewChart.focusChart().xOriginalDomain());
+                    gplOverviewChart.focusChart().redraw();
                 });
-            } else if (!rangesEqual(chart.filter(), gplOverviewChart.gplChart().filter())) {
+            } else if (!rangesEqual(chart.filter(), gplOverviewChart.focusChart().filter())) {
                 dc.events.trigger(function () {
-                    gplOverviewChart.gplChart().focus(chart.filter());
+                    gplOverviewChart.focusChart().focus(chart.filter());
                 });
             }
         });
