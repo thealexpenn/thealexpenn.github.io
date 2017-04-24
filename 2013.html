@@ -40,6 +40,8 @@ var width = 640,
 	
 d3.csv("S3GPL.csv", function(error, experiments) {
 
+  experiments.forEach(function(d) { d.date = new Date(d.date);});
+
   ndx = crossfilter(experiments);
   runDimension = ndx.dimension(function(d) {return [d.team, parseTime.parse(d.date)]; });
   overviewRunDimension = ndx.dimension(function(d) {return [d.team, parseTime.parse(d.date)]; });
