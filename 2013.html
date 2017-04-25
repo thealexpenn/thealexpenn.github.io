@@ -31,7 +31,7 @@ var gplmindate = new Date('2013-01-01'),
 	lplmindate = new Date('2013-03-01'),
 	lplmaxdate = new Date('2013-09-01');
 	
-var width = 640,
+var width = 750,
 	height = 400,
 	padding = 10,
 	overviewheight = 100;
@@ -65,13 +65,13 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .keyAccessor(function(d) {return d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(490).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(150).itemWidth(150).maxItems(8))
+	.legend(dc.legend().x(600).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(150).itemWidth(150).maxItems(8))
 	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
   ;	
 	
   gplChart.margins().left += 20;
   gplChart.margins().top += 0;
-  gplChart.margins().right += 40;
+  gplChart.margins().right += 150;
   
   gplChart.elasticX = function() {
     return arguments.length ? this : false;
