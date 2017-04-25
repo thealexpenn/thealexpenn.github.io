@@ -54,7 +54,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .height(height)
 	.chart(function(c) { return dc.lineChart(c).interpolate('linear'); })
     .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
-	.y(d3.scale.lineaer().domain([1100,2000])
+	.y(d3.scale.lineaer().domain([1100,2000]))
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
@@ -69,7 +69,6 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     
     .valueAccessor(function(d) {return +d.value;})
 	.legend(dc.legend().x(90).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
-	.forceY(0)
   ;	
 	
   gplChart.margins().left += 40;
