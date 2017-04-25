@@ -118,7 +118,8 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .group(runGroup)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
-    .valueAccessor(function(d) {return +d.value});
+    .valueAccessor(function(d) {return +d.value-1100})
+	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
 	
   gplOverviewChart.margins().left += 20;
   gplOverviewChart.margins().top += 0;
