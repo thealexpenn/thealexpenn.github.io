@@ -54,7 +54,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .height(height)
 	.chart(function(c) { return dc.lineChart(c).interpolate('linear'); })
     .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
-	.y(d3.scale.lineaer().domain([1100,2000]))
+	.y(d3.scale.linear().domain([1100,2000]))
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
