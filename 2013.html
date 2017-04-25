@@ -57,7 +57,6 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .dimension(runDimension)
     .group(runGroup)
     .mouseZoomable(true)
-    .rangeChart(gplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return d.key[1];})
     
