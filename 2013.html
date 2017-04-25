@@ -65,7 +65,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .keyAccessor(function(d) {return d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(600).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
+	.legend(dc.legend().x(540).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(100).maxItems(8))
 	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
   ;	
 	
