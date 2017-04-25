@@ -94,6 +94,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
   gplOverviewChart
     .width(overviewWidth)
     .height(overviewHeight)
+	.margins({top:0, right:0, bottom:0, left:20})
     .chart(function(c,_,_,i) {
     var chart = dc.lineChart(c).interpolate('basis');
     if(i===0)
@@ -180,7 +181,7 @@ d3.csv("S3LPL.csv", function(error, experiments) {
 
   lplOverviewChart
     .width(width)
-    .height(overviewheight)
+    .height(overviewHeight)
     .chart(function(c,_,_,i) {
     var chart = dc.lineChart(c).interpolate('basis');
     if(i===0)
