@@ -22,7 +22,7 @@ var gplChart = dc.seriesChart("#gpl");
 var gplOverviewChart = dc.seriesChart("#gpl-overview");
 var lplChart = dc.seriesChart("#lpl");
 var lplOverviewChart = dc.seriesChart("#lpl-overview");
-var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup;
+var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup, topElo;
 
 var parseTime = d3.time.format("%d-%b-%y");
 
@@ -54,6 +54,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .height(height)
 	.chart(function(c) { return dc.lineChart(c).interpolate('linear'); })
     .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
+	.y(d3.scale.lineaer().domain([1100,2000])
     .brushOn(false)
     .yAxisLabel("Elo")
     .xAxisLabel("Date")
@@ -66,9 +67,8 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return d.key[1];})
     
-    .valueAccessor(function(d) {return +d.value - 1100;})
+    .valueAccessor(function(d) {return +d.value;})
 	.legend(dc.legend().x(90).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
-	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
 	.forceY(0)
   ;	
 	
