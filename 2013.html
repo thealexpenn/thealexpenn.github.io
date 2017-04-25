@@ -54,7 +54,6 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
     .brushOn(false)
     .yAxisLabel("Elo")
-    .xAxisLabel("Date")
 	.clipPadding(10)
 	.elasticY(true)
     .dimension(runDimension)
