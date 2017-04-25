@@ -47,7 +47,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
   overviewRunGroup = overviewRunDimension.group().reduceSum(function(d) { return +d.elo; });
  
   gplChart
-    .colors(d3.scale.ordinal().domain(["TPA", "zTPA", "SGS", "zSGS", "ahq", "zahq", "SAJ", "zSAJ", "KLH", "zKLH", "SF5", "zSF5", "MLE", "zMLE", "Bangkok Titans", "zBKT"]).range(["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728", "#9467bd", "#9467bd", "#8c564b", "#8c564b", "#e377c2", "#e377c2", "#7f7f7f", "#7f7f7f"]))
+    .colors(d3.scale.ordinal().domain(["Taipei Assassins", "zTPA", "Singapore Sentinels", "zSGS", "Ahq e-Sports Club", "zahq", "Saigon Jokers", "zSAJ", "Kuala Lumpur Hunters", "zKLH", "Saigon Fantastic Five", "zSF5", "Manila Eagles", "zMLE", "Bangkok Titans", "zBKT"]).range(["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728", "#9467bd", "#9467bd", "#8c564b", "#8c564b", "#e377c2", "#e377c2", "#7f7f7f", "#7f7f7f"]))
     .width(width)
     .height(height)
 	.chart(function(c) { return dc.lineChart(c).interpolate('linear'); })
