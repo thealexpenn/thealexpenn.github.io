@@ -139,11 +139,10 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .colors(d3.scale.ordinal().domain(["iG", "ziG", "OMG", "zOMG", "PE", "zPE", "Royal", "zRoyal", "LMQ", "zLM", "WE", "zWE", "Spider", "WOA", "YG", "EP.HK"]).range(["#1f77b4", "#1f77b4", "#ff7f0e", "#ff7f0e", "#2ca02c", "#2ca02c", "#d62728", "#d62728", "#9467bd", "#9467bd", "#8c564b", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]))
     .width(width)
     .height(height)
-    .chart(function(c) { return dc.lineChart(c).interpolate('basis'); })
+    .chart(function(c) { return dc.lineChart(c).interpolate('linear'); })
     .x(d3.time.scale().domain([lplmindate, lplmaxdate]))
     .brushOn(false)
     .yAxisLabel("Elo")
-    .xAxisLabel("Date")
 	.clipPadding(10)
 	.elasticY(true)
     .dimension(runDimension)
@@ -154,8 +153,12 @@ d3.csv("S3LPL.csv", function(error, experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
-	.legend(dc.legend().x(50).y(400).itemHeight(13).gap(5).horizontal(1).legendWidth(350).itemWidth(70).maxItems(10));
+	.legend(dc.legend().x(600).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(150).itemWidth(150).maxItems(10))
   lplChart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
+  
+  lplChart.margins().left += 20;
+  lplChart.margins().top += 0;
+  lplChart.margins().right += 100;
   
   lplChart.elasticX = function() {
     return arguments.length ? this : false;
