@@ -9,7 +9,6 @@
 
 <div class="container">
 <div id="gpl"></div>
-<div id="gpl-overview"></div>
 <div id="lpl"></div>
 <div id="lpl-overview"></div>
 
@@ -19,7 +18,6 @@
 <script type="text/javascript">
 
 var gplChart = dc.seriesChart("#gpl");
-var gplOverviewChart = dc.seriesChart("#gpl-overview");
 var lplChart = dc.seriesChart("#lpl");
 var lplOverviewChart = dc.seriesChart("#lpl-overview");
 var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup, topElo;
@@ -91,43 +89,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
         return false;
     }
 
-  gplOverviewChart
-    .width(width)
-    .height(overviewHeight)
-    .chart(function(c,_,_,i) {
-    var chart = dc.lineChart(c).interpolate('basis');
-    if(i===0)
-    	chart.on('filtered', function (chart) {
-            if (!chart.filter()) {
-                dc.events.trigger(function () {
-                    gplOverviewChart.focusChart().x().domain(overviewChart.focusChart().xOriginalDomain());
-                    gplOverviewChart.focusChart().redraw();
-                });
-            } else if (!rangesEqual(chart.filter(), gplOverviewChart.focusChart().filter())) {
-                dc.events.trigger(function () {
-                    gplOverviewChart.focusChart().focus(chart.filter());
-                });
-            }
-        });
-    return chart;
-    })
-    .x(d3.time.scale().domain([gplmindate, gplmaxdate]))
-    .brushOn(true)
-    .clipPadding(10)
-    .dimension(runDimension)
-    .group(runGroup)
-    .seriesAccessor(function(d) {return d.key[0];})
-    .keyAccessor(function(d) {return +d.key[1];})
-    .valueAccessor(function(d) {return +d.value-1100})
-	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);});
-	
-  gplOverviewChart.margins().left += 20;
-  gplOverviewChart.margins().top += 0;
-  gplOverviewChart.margins().right += 110;
-
-
   dc.renderAll();
-  
   
   });
   
