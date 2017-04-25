@@ -60,7 +60,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .group(runGroup)
     .mouseZoomable(true)
     .seriesAccessor(function(d) {return d.key[0];})
-    .keyAccessor(function(d) {return formatDate(d.key[1]);})
+    .keyAccessor(function(d) {return d.key[1];})
     
     .valueAccessor(function(d) {return +d.value - 1100;})
 	.legend(dc.legend().x(600).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(150).itemWidth(150).maxItems(8))
