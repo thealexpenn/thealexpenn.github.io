@@ -26,6 +26,7 @@ var ndx, runDimension, runGroup, overviewRunDimension, overviewRunGroup;
 var eloMin, eloMax;
 
 var parseTime = d3.time.format("%d-%b-%y");
+var displayTime = d3.time.format(%y-%m-%d);
 
 var gplmindate = new Date('2013-01-01'),
 	gplmaxdate = new Date('2013-09-01'),
@@ -69,14 +70,12 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .mouseZoomable(true)
     .rangeChart(gplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
-    .keyAccessor(function(d) {return d.key[1];})
-    .valueAccessor(function(d) {return +d.value-1100;})
+    .keyAccessor(function(d) {return displayTime(d.key[1]);})
+    .valueAccessor(function(d) {return +Math.round10(d.value, -1) -1100;})
 	.legend(dc.legend().x(90).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
 	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
   ;	
 	
-  gplChart.title(function(d) {return d.key[1];});
-  gplChart.renderTitle(true);
   gplChart.margins().left += 40;
   gplChart.margins().top += 40;
   
