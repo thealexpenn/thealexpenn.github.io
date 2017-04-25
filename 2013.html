@@ -92,7 +92,7 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     }
 
   gplOverviewChart
-    .width(overviewWidth)
+    .width(width)
     .height(overviewHeight)
     .chart(function(c,_,_,i) {
     var chart = dc.lineChart(c).interpolate('basis');
