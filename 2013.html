@@ -119,6 +119,10 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return +d.key[1];})
     .valueAccessor(function(d) {return +d.value})
+	.margins().left += 20;
+	.margins().top += 0;
+    .margins().right += 110;
+	
 
   dc.renderAll();
   
