@@ -69,14 +69,16 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .rangeChart(gplOverviewChart)
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return d.key[1];})
-    .valueAccessor(function(d) {return +d.value;})
+    .valueAccessor(function(d) {return +d.value-1100;})
 	.legend(dc.legend().x(90).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
 	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
-	.title(function(d) {return [
-								"Date:" + d.date,
-								"Elo:" + d.elo
-								]
-								.join("\n");
+	.renderTitle(true)
+	.title(function(d) {
+		return [
+			d.key[0],
+			"Date:" + d.date,
+			"Elo:" + d.elo
+			].join("\n");
 	});
   gplChart.margins().left += 40;
   gplChart.margins().top += 40;
