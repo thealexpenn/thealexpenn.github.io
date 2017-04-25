@@ -28,10 +28,8 @@ var parseTime = d3.time.format("%d-%b-%y");
 
 var gplmindate = new Date('2013-01-01'),
 	gplmaxdate = new Date('2013-09-01'),
-	lplmindate = new Date('2013-01-01'),
+	lplmindate = new Date('2013-03-01'),
 	lplmaxdate = new Date('2013-09-01'),
-	minelo = 1100,
-	maxelo = 1700;
 	
 var width = 640,
 	height = 400,
@@ -66,13 +64,14 @@ d3.csv("S3GPL.csv", function(error, experiments) {
     .seriesAccessor(function(d) {return d.key[0];})
     .keyAccessor(function(d) {return d.key[1];})
     
-    .valueAccessor(function(d) {return +d.value-1100;})
-	.legend(dc.legend().x(90).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
+    .valueAccessor(function(d) {return +d.value - 1100;})
+	.legend(dc.legend().x(600).y(10).itemHeight(13).gap(5).horizontal(1).legendWidth(200).itemWidth(50).maxItems(8))
 	.yAxis().tickFormat(function(d) {return d3.format(',d')(d+1100);})
   ;	
 	
-  gplChart.margins().left += 40;
-  gplChart.margins().top += 40;
+  gplChart.margins().left += 20;
+  gplChart.margins().top += 0;
+  gplChart.margins().right += 40;
   
   gplChart.elasticX = function() {
     return arguments.length ? this : false;
